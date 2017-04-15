@@ -37,7 +37,7 @@ Accuracy - RMSE:
 #### 1.3 Output
 ![rmse_result](https://cloud.githubusercontent.com/assets/24623272/25064479/66c7f864-222d-11e7-9b0d-fcd6f040b12f.JPG)
 
-Note please check the notebook (ekf-visualization.ipynb) for details.
+Note please check the notebook (ukf-visualization.ipynb) for details.
 
 ## 2. Related Charts
 
