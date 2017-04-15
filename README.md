@@ -1,10 +1,6 @@
 # Unscented Kalman Filter Project
 Self-Driving Car Engineer Nanodegree Program
 
-# Introduction
-The unscented Kalman filter is a way to improve on the extended Kalman Filter. Unlike the EKF the UKF does not linearize the 
-state equations. It relies on constructing sigma points that get propagated through the state vector model. 
-
 # Project Overview
 The goals / steps of this project are the following:
 * Complete the Unscented Kalman Filter algorithm in C++.
@@ -13,12 +9,12 @@ The goals / steps of this project are the following:
 
 
 [//]: # (Image References)
-![yaw_angle_est](https://cloud.githubusercontent.com/assets/24623272/25064435/73380324-222c-11e7-9fe9-a8ffac8e67bc.png)
-![nis_lidar](https://cloud.githubusercontent.com/assets/24623272/25064437/733936e0-222c-11e7-9011-44699643fc50.png)
-![nis_radar](https://cloud.githubusercontent.com/assets/24623272/25064436/7338870e-222c-11e7-9507-069ee1311e09.png)
-![position_est](https://cloud.githubusercontent.com/assets/24623272/25064439/735b856a-222c-11e7-91b1-3f0c3a0cb1c5.png)
-![velocity_est](https://cloud.githubusercontent.com/assets/24623272/25064440/736032ae-222c-11e7-957e-e5e2106c159a.png)
-![rmse_result](https://cloud.githubusercontent.com/assets/24623272/25064479/66c7f864-222d-11e7-9b0d-fcd6f040b12f.JPG)
+[yaw_angle_est](https://cloud.githubusercontent.com/assets/24623272/25064435/73380324-222c-11e7-9fe9-a8ffac8e67bc.png)
+[nis_lidar](https://cloud.githubusercontent.com/assets/24623272/25064437/733936e0-222c-11e7-9011-44699643fc50.png)
+[nis_radar](https://cloud.githubusercontent.com/assets/24623272/25064436/7338870e-222c-11e7-9507-069ee1311e09.png)
+[position_est](https://cloud.githubusercontent.com/assets/24623272/25064439/735b856a-222c-11e7-91b1-3f0c3a0cb1c5.png)
+[velocity_est](https://cloud.githubusercontent.com/assets/24623272/25064440/736032ae-222c-11e7-957e-e5e2106c159a.png)
+[rmse_result](https://cloud.githubusercontent.com/assets/24623272/25064479/66c7f864-222d-11e7-9b0d-fcd6f040b12f.JPG)
 
 ## 1. Final Result
 
