@@ -42,9 +42,12 @@ Note please check the notebook (ekf-visualization.ipynb) for details.
 ## 2. Related Charts
 
 #### 2.1. NIS Lidar
+
+The lidar measurement space is two dimensional (x,y) and the chi-squared value for a 95% confidence intervall is 5.99.
 ![nis_lidar](https://cloud.githubusercontent.com/assets/24623272/25064437/733936e0-222c-11e7-9011-44699643fc50.png)
 
 #### 2.2. NIS Radar
+The radar measurement space is three dimensional (rho, phi, rho_dot) and the chi-squared value for a 95% confidence intervall is 7.82.
 ![nis_radar](https://cloud.githubusercontent.com/assets/24623272/25064436/7338870e-222c-11e7-9507-069ee1311e09.png)
 
 #### 2.3. position estimation 
