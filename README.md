@@ -29,11 +29,10 @@ Accuracy - RMSE:
 #### 1.2. sample data 2   
 
 Accuracy - RMSE:    
-0.15118 
-0.189515 
-0.237983 
-0.287951  
-
+0.15118    
+0.189515    
+0.237983    
+0.287951    
 
 #### 1.3 Output
 ![rmse_result](https://cloud.githubusercontent.com/assets/24623272/25064479/66c7f864-222d-11e7-9b0d-fcd6f040b12f.JPG)
