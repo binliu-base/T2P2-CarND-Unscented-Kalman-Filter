@@ -1,46 +1,59 @@
-# Unscented Kalman Filter Project Starter Code
+# Unscented Kalman Filter Project
 Self-Driving Car Engineer Nanodegree Program
 
----
+# Introduction
+The unscented Kalman filter is a way to improve on the extended Kalman Filter. Unlike the EKF the UKF does not linearize the 
+state equations. It relies on constructing sigma points that get propagated through the state vector model. 
 
-## Dependencies
+# Project Overview
+The goals / steps of this project are the following:
+* Complete the Unscented Kalman Filter algorithm in C++.
+* Apply it to pedestrian position/speed estimation problem 
+* Evaluate it again two sampled data, the metrics used is RMSE
 
-* cmake >= v3.5
-* make >= v4.1
-* gcc/g++ >= v5.4
 
-## Basic Build Instructions
+[//]: # (Image References)
+![yaw_angle_est](https://cloud.githubusercontent.com/assets/24623272/25064435/73380324-222c-11e7-9fe9-a8ffac8e67bc.png)
+![nis_lidar](https://cloud.githubusercontent.com/assets/24623272/25064437/733936e0-222c-11e7-9011-44699643fc50.png)
+![nis_radar](https://cloud.githubusercontent.com/assets/24623272/25064436/7338870e-222c-11e7-9507-069ee1311e09.png)
+![position_est](https://cloud.githubusercontent.com/assets/24623272/25064439/735b856a-222c-11e7-91b1-3f0c3a0cb1c5.png)
+![velocity_est](https://cloud.githubusercontent.com/assets/24623272/25064440/736032ae-222c-11e7-957e-e5e2106c159a.png)
+![rmse_result](https://cloud.githubusercontent.com/assets/24623272/25064479/66c7f864-222d-11e7-9b0d-fcd6f040b12f.JPG)
 
-1. Clone this repo.
-2. Make a build directory: `mkdir build && cd build`
-3. Compile: `cmake .. && make`
-4. Run it: `./UnscentedKF path/to/input.txt path/to/output.txt`. You can find
-   some sample inputs in 'data/'.
-    - eg. `./UnscentedKF ../data/sample-laser-radar-measurement-data-1.txt output.txt`
+## 1. Final Result
 
-## Editor Settings
+#### 1.1. sample data 1
 
-We've purposefully kept editor configuration files out of this repo in order to
-keep it as simple and environment agnostic as possible. However, we recommend
-using the following settings:
+Accuracy - RMSE:  
+0.0824666
+0.0878453
+ 0.644505
+ 0.584015
 
-* indent using spaces
-* set tab width to 2 spaces (keeps the matrices in source code aligned)
+#### 1.2. sample data 2
 
-## Code Style
+Accuracy - RMSE: 
+0.15118 
+0.189515 
+0.237983 
+0.287951
 
-Please stick to [Google's C++ style guide](https://google.github.io/styleguide/cppguide.html) as much as possible.
+#### 1.3 Output
+![rmse_result](https://cloud.githubusercontent.com/assets/24623272/25064479/66c7f864-222d-11e7-9b0d-fcd6f040b12f.JPG)
 
-## Generating Additional Data
+Note please check the notebook (ekf-visualization.ipynb) for details.
 
-This is optional!
+## 2. Related Charts
 
-If you'd like to generate your own radar and lidar data, see the
-[utilities repo](https://github.com/udacity/CarND-Mercedes-SF-Utilities) for
-Matlab scripts that can generate additional data.
+#### 2.1. NIS Lidar
+![nis_lidar](https://cloud.githubusercontent.com/assets/24623272/25064437/733936e0-222c-11e7-9011-44699643fc50.png)
 
-## Project Instructions and Rubric
+#### 2.2. NIS Radar
+![nis_radar](https://cloud.githubusercontent.com/assets/24623272/25064436/7338870e-222c-11e7-9507-069ee1311e09.png)
 
-This information is only accessible by people who are already enrolled in Term 2
-of CarND. If you are enrolled, see [the project page](https://classroom.udacity.com/nanodegrees/nd013/parts/40f38239-66b6-46ec-ae68-03afd8a601c8/modules/0949fca6-b379-42af-a919-ee50aa304e6a/lessons/c3eb3583-17b2-4d83-abf7-d852ae1b9fff/concepts/4d0420af-0527-4c9f-a5cd-56ee0fe4f09e)
-for instructions and the project rubric.
+#### 2.3. position estimation 
+![position_est](https://cloud.githubusercontent.com/assets/24623272/25064439/735b856a-222c-11e7-91b1-3f0c3a0cb1c5.png)
+
+#### 2.4. velocity estimation 
+![velocity_est](https://cloud.githubusercontent.com/assets/24623272/25064440/736032ae-222c-11e7-957e-e5e2106c159a.png)
+
