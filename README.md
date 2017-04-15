@@ -20,19 +20,20 @@ The goals / steps of this project are the following:
 
 #### 1.1. sample data 1
 
-Accuracy - RMSE:  
-0.0824666
-0.0878453
- 0.644505
- 0.584015
+Accuracy - RMSE:   
+0.0824666  
+0.0878453  
+0.644505  
+0.584015  
 
-#### 1.2. sample data 2
+#### 1.2. sample data 2   
 
-Accuracy - RMSE: 
+Accuracy - RMSE:    
 0.15118 
 0.189515 
 0.237983 
-0.287951
+0.287951  
+
 
 #### 1.3 Output
 ![rmse_result](https://cloud.githubusercontent.com/assets/24623272/25064479/66c7f864-222d-11e7-9b0d-fcd6f040b12f.JPG)
