@@ -1,34 +1,59 @@
+# Unscented Kalman Filter Project
+Self-Driving Car Engineer Nanodegree Program
 
-PROJECT DESCRIPTION
-The project "unscented Kalman filter" is based on the same structure as the extended Kalman filter.
-It uses a main file that calls a function called ProcessMeasurement. Anything important happens in this function. The function is part of the class ukf.
+# Introduction
+The unscented Kalman filter is a way to improve on the extended Kalman Filter. Unlike the EKF the UKF does not linearize the 
+state equations. It relies on constructing sigma points that get propagated through the state vector model. 
 
-
-C++ QUIZZES
-The quizzes including the solutions of them are included in the file ukf.cpp. They are individual functions, which don't need any special environment. The solution of the quizzes are given here and also the expected results.
-The quizzes can easily evaluated: if every value of the student solution (vectors and matrices) differs less than 0.001 from the original solution, the quizz is passed, otherwise failed.
-
-
-
-PROJECT PASSING CRITERIA
-There are several criteria that must be fulfilled to pass the project.
-
-- The overall processing chain (prediction, laser update or radar update depending on measurement type) must be correct.
-- The student is not allowed to use values from the future to reason about the current state.
-- It must be possible to run the project in three different modes: considering laser only, with considering radar only, or with using both sensors.
-- For every mode, the overall RMSE (2d position only) may not be more than 10% increased to what the original solution is able to reach (this number depends on the individual measurement sequence)
-- The RMSE of laser AND radar must be lower than radar only or laser only
-- The NIS of radar measurements must be between 0.35 and 7.81 in at least 80% of all radar update steps.
+# Project Overview
+The goals / steps of this project are the following:
+* Complete the Unscented Kalman Filter algorithm in C++.
+* Apply it to pedestrian position/speed estimation problem 
+* Evaluate it again two sampled data, the metrics used is RMSE
 
 
-PROJECT GRADING
-- I recommend a hall of fame for the lowest overall RMSE using laser AND radar.
-- I recommend to ask students to improve the initialization procedure and evaluate the RMSE during the first 20 steps.
+[//]: # (Image References)
+![yaw_angle_est](https://cloud.githubusercontent.com/assets/24623272/25064435/73380324-222c-11e7-9fe9-a8ffac8e67bc.png)
+![nis_lidar](https://cloud.githubusercontent.com/assets/24623272/25064437/733936e0-222c-11e7-9011-44699643fc50.png)
+![nis_radar](https://cloud.githubusercontent.com/assets/24623272/25064436/7338870e-222c-11e7-9507-069ee1311e09.png)
+![position_est](https://cloud.githubusercontent.com/assets/24623272/25064439/735b856a-222c-11e7-91b1-3f0c3a0cb1c5.png)
+![velocity_est](https://cloud.githubusercontent.com/assets/24623272/25064440/736032ae-222c-11e7-957e-e5e2106c159a.png)
+![rmse_result](https://cloud.githubusercontent.com/assets/24623272/25064479/66c7f864-222d-11e7-9b0d-fcd6f040b12f.JPG)
 
+## 1. Final Result
 
+#### 1.1. sample data 1
 
+Accuracy - RMSE:  
+0.0824666
+0.0878453
+ 0.644505
+ 0.584015
 
+#### 1.2. sample data 2
 
+Accuracy - RMSE: 
+0.15118 
+0.189515 
+0.237983 
+0.287951
 
+#### 1.3 Output
+![rmse_result](https://cloud.githubusercontent.com/assets/24623272/25064479/66c7f864-222d-11e7-9b0d-fcd6f040b12f.JPG)
 
+Note please check the notebook (ekf-visualization.ipynb) for details.
+
+## 2. Related Charts
+
+#### 2.1. NIS Lidar
+![nis_lidar](https://cloud.githubusercontent.com/assets/24623272/25064437/733936e0-222c-11e7-9011-44699643fc50.png)
+
+#### 2.2. NIS Radar
+![nis_radar](https://cloud.githubusercontent.com/assets/24623272/25064436/7338870e-222c-11e7-9507-069ee1311e09.png)
+
+#### 2.3. position estimation 
+![position_est](https://cloud.githubusercontent.com/assets/24623272/25064439/735b856a-222c-11e7-91b1-3f0c3a0cb1c5.png)
+
+#### 2.4. velocity estimation 
+![velocity_est](https://cloud.githubusercontent.com/assets/24623272/25064440/736032ae-222c-11e7-957e-e5e2106c159a.png)
 
