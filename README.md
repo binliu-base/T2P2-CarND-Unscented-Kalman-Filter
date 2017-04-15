@@ -20,11 +20,11 @@ The goals / steps of this project are the following:
 
 #### 1.1. sample data 1
 
-Accuracy - RMSE:   
-0.0824666  
-0.0878453  
-0.644505  
-0.584015  
+Accuracy - RMSE:  
+0.0824666   
+0.0878453   
+0.644505   
+0.584015   
 
 #### 1.2. sample data 2   
 
