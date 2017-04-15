@@ -1,7 +1,7 @@
-
 #include <fstream>
 #include <iostream>
 #include <sstream>
+#include <iomanip> 
 #include <vector>
 #include <stdlib.h>
 #include "Eigen/Dense"
@@ -13,6 +13,17 @@ using namespace std;
 using Eigen::MatrixXd;
 using Eigen::VectorXd;
 using std::vector;
+
+bool Tools::trace_tag = false;
+string Tools::tracelog = "/mnt/d/data/trace.MY.log";
+string Tools::tab = " ";
+//ofstream Tools::traceStream = ofstream(Tools::tracelog.data(), ios::app);
+//ofstream Tools::traceStream = ofstream(Tools::tracelog.data(), ofstream::out);
+ofstream Tools::traceStream(Tools::tracelog.data(), ofstream::out);
+// int Tools::debugK = 6;
+// int Tools::traceK = 0;
+// int Tools::traceDG = 0;
+float Tools::yaw_angle_gap = 0.05;
 
 void check_arguments(int argc, char* argv[]) {
   string usage_instructions = "Usage instructions: ";
@@ -48,6 +59,7 @@ void check_files(ifstream& in_file, string& in_name,
     cerr << "Cannot open output file: " << out_name << endl;
     exit(EXIT_FAILURE);
   }
+
 }
 
 int main(int argc, char* argv[]) {
@@ -142,11 +154,14 @@ int main(int argc, char* argv[]) {
   size_t number_of_measurements = measurement_pack_list.size();
 
   // column names for output file
+  out_file_ << "type" << "\t";  
   out_file_ << "px" << "\t";
   out_file_ << "py" << "\t";
   out_file_ << "v" << "\t";
   out_file_ << "yaw_angle" << "\t";
   out_file_ << "yaw_rate" << "\t";
+  out_file_ << "vx" << "\t";
+  out_file_ << "vy" << "\t";
   out_file_ << "px_measured" << "\t";
   out_file_ << "py_measured" << "\t";
   out_file_ << "px_true" << "\t";
@@ -156,9 +171,22 @@ int main(int argc, char* argv[]) {
   out_file_ << "NIS" << "\n";
 
 
+  // Tools::traceStream.close();
   for (size_t k = 0; k < number_of_measurements; ++k) {
+
     // Call the UKF-based fusion
     ukf.ProcessMeasurement(measurement_pack_list[k]);
+
+	// out_file_ << "k=" << k << "\t"; 
+
+	if (measurement_pack_list[k].sensor_type_ == MeasurementPackage::LASER) {
+		out_file_ << "L" << "\t"; // sensor type
+
+	}
+	else {
+		out_file_ << "R" << "\t"; // sensor type
+
+	}
 
     // output the estimation
     out_file_ << ukf.x_(0) << "\t"; // pos1 - est
@@ -167,21 +195,32 @@ int main(int argc, char* argv[]) {
     out_file_ << ukf.x_(3) << "\t"; // yaw_angle -est
     out_file_ << ukf.x_(4) << "\t"; // yaw_rate -est
 
+    //output indirect vx,xy estimation
+    double v  = ukf.x_(2);
+    double yaw_angle = ukf.x_(3);
+
+    double vx = cos(yaw_angle)*v;
+    double vy = sin(yaw_angle)*v;
+
+    out_file_ << vx << "\t"; // velocity x direction -est
+    out_file_ << vy << "\t"; // velocity y direction -est    
+
+
     // output the measurements
     if (measurement_pack_list[k].sensor_type_ == MeasurementPackage::LASER) {
-      // output the estimation
+     // output the estimation
 
-      // p1 - meas
-      out_file_ << measurement_pack_list[k].raw_measurements_(0) << "\t";
+     // p1 - meas
+     out_file_ << measurement_pack_list[k].raw_measurements_(0) << "\t";
 
-      // p2 - meas
-      out_file_ << measurement_pack_list[k].raw_measurements_(1) << "\t";
+     // p2 - meas
+     out_file_ << measurement_pack_list[k].raw_measurements_(1) << "\t";
     } else if (measurement_pack_list[k].sensor_type_ == MeasurementPackage::RADAR) {
-      // output the estimation in the cartesian coordinates
-      float ro = measurement_pack_list[k].raw_measurements_(0);
-      float phi = measurement_pack_list[k].raw_measurements_(1);
-      out_file_ << ro * cos(phi) << "\t"; // p1_meas
-      out_file_ << ro * sin(phi) << "\t"; // p2_meas
+     // output the estimation in the cartesian coordinates
+     float ro = measurement_pack_list[k].raw_measurements_(0);
+     float phi = measurement_pack_list[k].raw_measurements_(1);
+     out_file_ << ro * cos(phi) << "\t"; // p1_meas
+     out_file_ << ro * sin(phi) << "\t"; // p2_meas
     }
 
     // output the ground truth packages
@@ -193,9 +232,9 @@ int main(int argc, char* argv[]) {
     // output the NIS values
     
     if (measurement_pack_list[k].sensor_type_ == MeasurementPackage::LASER) {
-      out_file_ << ukf.NIS_laser_ << "\n";
+     out_file_ << ukf.NIS_laser_ << "\n";
     } else if (measurement_pack_list[k].sensor_type_ == MeasurementPackage::RADAR) {
-      out_file_ << ukf.NIS_radar_ << "\n";
+     out_file_ << ukf.NIS_radar_ << "\n";
     }
 
 
@@ -208,15 +247,15 @@ int main(int argc, char* argv[]) {
     float vy_estimate_ = ukf.x_(2) * sin(ukf.x_(3));
     
     ukf_x_cartesian_ << x_estimate_, y_estimate_, vx_estimate_, vy_estimate_;
-    
+
     estimations.push_back(ukf_x_cartesian_);
     ground_truth.push_back(gt_pack_list[k].gt_values_);
 
   }
 
-  // compute the accuracy (RMSE)
   Tools tools;
   cout << "Accuracy - RMSE:" << endl << tools.CalculateRMSE(estimations, ground_truth) << endl;
+
 
   // close files
   if (out_file_.is_open()) {

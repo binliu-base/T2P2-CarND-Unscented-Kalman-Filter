@@ -75,6 +75,14 @@ public:
   double NIS_laser_;
 
   /**
+  *   add by binliu
+  */
+  // previous timestamp
+  long long previous_timestamp_;  
+  //set measurement dimension, radar can measure r, phi, and r_dot
+  int n_z_;  
+
+  /**
    * Constructor
    */
   UKF();
@@ -108,6 +116,22 @@ public:
    * @param meas_package The measurement at k+1
    */
   void UpdateRadar(MeasurementPackage meas_package);
+
+  /**
+  *   add by binliu
+  */
+  bool Init(const MeasurementPackage &measurement_pack);
+  void AugmentedSigmaPoints(MatrixXd &Xsig_aug);
+  void SigmaPointPrediction(const MatrixXd &Xsig_aug, double delta_t);
+  void PredictMeanAndCovariance(const MatrixXd &Xsig_pred);
+  void PredictRadarMeasurement(VectorXd &z_pred, MatrixXd &S, MatrixXd &Zsig, const MatrixXd &Xsig_pred);
+  void UpdateRadarState(const MeasurementPackage &meas_package, const MatrixXd &Xsig_pred, const MatrixXd &Zsig, const VectorXd &z_pred, const MatrixXd &S);
+  void NormalizeAngle(double &angle);
+  double ComputeNIS(const VectorXd &z_pred, const MatrixXd &S, const VectorXd &z);
+  
+  /*
+  end add
+  */  
 };
 
 #endif /* UKF_H */
